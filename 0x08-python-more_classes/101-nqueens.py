@@ -17,15 +17,14 @@ def board_deepcopy(board):
     return (board)
 
 def get_solution(board):
-    """Return the list of lists representation of a solved chessboar."""
+    """Return the list of lists representation of a solved chessboard."""
     solution = []
     for r in range(len(board)):
         for c in range(len(board)):
             if board[r][c] == "Q":
                 solution.append([r, c])
                 break
-    return (solution)
-
+            return (solution)
 
 def xout(board, row, col):
     """X out spots on a chessboard.
@@ -74,7 +73,7 @@ def recursive_solve(board, row, queens, solutions):
         solutions
     """
     if queens == len(board):
-        solutions.append(get_solution(board)
+        solutions.append(get_solution(board))
         return (solutions)
 
     for c in range(len(board)):
@@ -100,4 +99,4 @@ if __name__ == "__main__":
     board = init_board(int(sys.argv[1]))
     solutions = recursive_solve(board, 0, 0, [])
     for sol in solutions:
-    print(sol)
+        print(sol)

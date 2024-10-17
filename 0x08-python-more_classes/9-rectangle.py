@@ -31,7 +31,7 @@ class Rectangle:
         '''
         return self.__width
 
- @width.setter
+    @width.setter
     def width(self, value):
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
@@ -54,7 +54,8 @@ class Rectangle:
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
-            raise ValueError("height must be >= 0")                                 self.__height = value
+            raise ValueError("height must be >= 0")
+        self.__height = value
 
     def area(self):
         '''Returns area of this rectangle.'''
@@ -94,19 +95,19 @@ class Rectangle:
 	Returns:
 		The rectangle with the larger area.
 	'''
-	if not isinstance(rect_1, Rectangle):
-		raise TypeError("rect_1 must be an instance of Rectangle")
-	if not isinstance(rect_2, Rectangle):
-		raise TypeError("rect_2 must be an instance of Rectangle")
-	if rect_2.area() > rect_1.area():
-		return rect_2
-	return rect_1
+        if not isinstance(rect_1, Rectangle):
+            raise TypeError("rect_1 must be an instance of Rectangle")
+        if not isinstance(rect_2, Rectangle):
+            raise TypeError("rect_2 must be an instance of Rectangle")
+        if rect_2.area() > rect_1.area():
+            return rect_2
+        return rect_1
 
     @classmethod
     def square(cls, size=0):
-	'''Instantiates a new square.
+        '''Instantiates a new square.
 
-	Args:
+        Args:
 		size: the size of the new square.
 	'''
-	return cls(size, size)
+        return cls(size, size)
