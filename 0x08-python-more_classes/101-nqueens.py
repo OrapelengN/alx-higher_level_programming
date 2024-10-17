@@ -73,7 +73,7 @@ def recursive_solve(board, row, queens, solutions):
     Returns:
         solutions
     """
-    if queens = len(board):
+    if queens == len(board):
         solutions.append(get_solution(board)
         return (solutions)
 
