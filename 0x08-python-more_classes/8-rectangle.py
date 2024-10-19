@@ -31,7 +31,7 @@ class Rectangle:
         '''
         return self.__width
 
- @width.setter
+    @width.setter
     def width(self, value):
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
@@ -54,7 +54,8 @@ class Rectangle:
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
-            raise ValueError("height must be >= 0")                                 self.__height = value
+            raise ValueError("height must be >= 0")
+        self.__height = value
 
     def area(self):
         '''Returns area of this rectangle.'''
@@ -84,20 +85,20 @@ class Rectangle:
 
     @staticmethod
     def bigger_or_equal(rect_1, rect_2):
-    '''Returns the bigger of two rectangles.
+        '''Returns the bigger of two rectangles.
 
-	Args:
+        Args:
 		rect_1: The first rectangle.
 		rect_2: The second rectangle.
 	Raises:
 		TypeErrror: If rect_1, rect_2 are not instances of Rectangle.
 	Returns:
 		The rectangle with the larger area.
-	'''
-	if not isinstance(rect_1, Rectangle):
-		raise TypeError("rect_1 must be an instance of Rectangle")
-	if not isinstance(rect_2, Rectangle):
-		raise TypeError("rect_2 must be an instance of Rectangle")
-	if rect_2.area() > rect_1.area():
-		return rect_2
-	return rect_1
+        '''
+        if not isinstance(rect_1, Rectangle):
+            raise TypeError("rect_1 must be an instance of Rectangle")
+        if not isinstance(rect_2, Rectangle):
+            raise TypeError("rect_2 must be an instance of Rectangle")
+        if rect_2.area() > rect_1.area():
+            return rect_2
+        return rect_1
