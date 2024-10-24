@@ -3,7 +3,7 @@
 from models.base import Base
 
 
-class Rectangle(Base): 
+class Rectangle(Base):
     """Represent a rectangle."""
 
     def __init__(self, width, height, x=0, y=0, id=None):
@@ -25,7 +25,7 @@ class Rectangle(Base):
         self.height = height
         self.x = x
         self.y = y
-        
+
         @property
         def width(self):
             """Set/get the width of the Rectangle."""

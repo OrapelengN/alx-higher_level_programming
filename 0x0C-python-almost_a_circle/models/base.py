@@ -4,7 +4,7 @@
 
 class Base:
     """Base class to manage the id attribute for future classes."""
-    
+
     __nb_objects = 0  # Private class attribute to track number of instances
 
     def __init__(self, id=None):
