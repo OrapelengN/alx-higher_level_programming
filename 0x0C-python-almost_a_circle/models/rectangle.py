@@ -1,4 +1,4 @@
-#!/usr/bin/pythoin3
+#!/usr/bin/python3
 """Defines a rectangle class."""
 from models.base import Base
 
@@ -26,6 +26,21 @@ class Rectangle(Base):
         self.x = x
         self.y = y
 
+        def validate_integer(self, name, value):
+            """Validate that value is an integer"""
+            if not isinstance(value, int):
+                raise TypeError(f"{name} must be an integer")
+
+        def validate_positive(self, name, value):
+            """Validate that value is greater than 0"""
+            if value <= 0:
+                raise ValueError(f"{name} must be > 0")
+
+        def validate_non_negative(self, name, value):
+            """Validate that value is greater than or equal to 0"""
+            if value < 0:
+                raise ValueError(f"{name} must be >= 0")
+
         @property
         def width(self):
             """Set/get the width of the Rectangle."""
@@ -33,10 +48,8 @@ class Rectangle(Base):
 
         @width.setter
         def width(self, value):
-            if type(value) != int:
-                raise TypeError("width must be an integer")
-            if value <= 0:
-                raise ValueError("width must be > 0")
+            self.validate_integer("width", value)
+            self.validate_positive("width", value)
             self.__width = value
 
         @property
@@ -46,10 +59,8 @@ class Rectangle(Base):
 
         @height.setter
         def height(self, value):
-            if type(value) != int:
-                raise TypeError("height must be an integer")
-            if value <= 0:
-                raise ValueError("height must be > 0")
+            self.validate_integer("height", value)
+            self.validate_positive("height", value)
             self.__height = value
 
         @property
@@ -59,10 +70,8 @@ class Rectangle(Base):
 
         @x.setter
         def x(self, value):
-            if type(value) != int:
-                raise TypeError("x must be an integer")
-            if value < 0:
-                raise ValueError("x must be >= 0")
+            self.validate_integer("x", value)
+            self.validate_non_negative("x", value)
             self.__x = value
 
         @property
@@ -72,8 +81,6 @@ class Rectangle(Base):
 
         @y.setter
         def y(self, value):
-            if type(value) != int:
-                raise TypeError("y must be an integer")
-            if value < 0:
-                raise ValueError("y must be >= 0")
+            self.validate_integer("y", value)
+            self.validate_non_negative("y", value)
             self.__y = value
