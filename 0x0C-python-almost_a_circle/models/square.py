@@ -4,6 +4,7 @@
 # models/square.py
 from models.rectangle import Rectangle
 
+
 class Square(Rectangle):
     """Square class that inherits from Rectangle"""
 
@@ -13,7 +14,8 @@ class Square(Rectangle):
 
     def __str__(self):
         """Override the __str__ method to return a formatted string"""
-        return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y, self.width)
+        return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y,
+                                                 self.width)
 
     @property
     def size(self):
