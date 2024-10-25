@@ -113,6 +113,29 @@ class Rectangle(Base):
             for _ in range(self.height):
                 print(' ' * self.x + '#' * self.width)
 
+        def update(self, *args, **kwargs):
+            """Update attributes with *args based on the order: id, width, height, x, y"""
+            if len(args) > 0:
+                self.id = args[0]
+            if len(args) > 1:
+                self.width = args[1]
+            if len(args) > 2:
+                self.height = args[2]
+            if len(args) > 3:
+                self.x = args[3]
+            if len(args) > 4:
+                self.y = args[4]
+
+            if args:
+                attributes = ["id", "width", "height", "x", "y"]
+                for i, value in enumerate(args):
+                    if i < len(attributes):
+                        setattr(self, attributes[i], value)
+            else:
+                # Use **kwargs if *args is not provided
+                for key, value in kwargs.items():
+                    if hasattr(self, key):
+                        setattr(self, key, value)
+
         def __str__(self):
-            """Return the string representation of the Rectangle"""
-            return f"[Rectangle] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
+            return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
