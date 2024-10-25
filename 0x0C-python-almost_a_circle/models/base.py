@@ -5,6 +5,7 @@
 import json
 import os
 import csv
+import turtle
 
 
 class Base:
@@ -120,3 +121,37 @@ class Base:
         if json_string is None or json_string == "":
             return []
         return json.loads(json_string)
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """Draws all Rectangles and Squares using Turtle graphics."""
+
+        # Set up the turtle window
+        screen = turtle.Screen()
+        screen.title("Draw Rectangles and Squares")
+        turtle.speed("fastest")
+
+        # Function to draw a single shape
+        def draw_shape(x, y, width, height, color):
+            turtle.penup()
+            turtle.goto(x, y)
+            turtle.pendown()
+            turtle.color(color)
+            turtle.begin_fill()
+            for _ in range(2):
+                turtle.forward(width)
+                turtle.left(90)
+                turtle.forward(height)
+                turtle.left(90)
+            turtle.end_fill()
+
+        # Draw each rectangle in list_rectangles
+        for rect in list_rectangles:
+            draw_shape(rect.x, rect.y, rect.width, rect.height, "blue")
+
+        # Draw each square in list_squares
+        for square in list_squares:
+            draw_shape(square.x, square.y, square.size, square.size, "green")
+
+        # Close the turtle graphics window on click
+        turtle.done()
