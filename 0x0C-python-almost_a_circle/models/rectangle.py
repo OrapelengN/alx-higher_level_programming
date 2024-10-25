@@ -106,7 +106,8 @@ class Rectangle(Base):
             return self.width * self.height
 
         def display(self):
-            """Print the rectangle instance using the '#' character with x and y offsets"""
+            """Print the rectangle instance using the '#' character
+                                            with x and y offsets"""
             for _ in range(self.y):
                 print()
 
@@ -114,7 +115,8 @@ class Rectangle(Base):
                 print(' ' * self.x + '#' * self.width)
 
         def update(self, *args, **kwargs):
-            """Update attributes with *args based on the order: id, width, height, x, y"""
+            """Update attributes with *args based on the order: id,
+                                            width, height, x, y"""
             if len(args) > 0:
                 self.id = args[0]
             if len(args) > 1:
@@ -138,4 +140,6 @@ class Rectangle(Base):
                         setattr(self, key, value)
 
         def __str__(self):
-            return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
+            return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x,
+                                                           self.y, self.width,
+                                                           self.height)
