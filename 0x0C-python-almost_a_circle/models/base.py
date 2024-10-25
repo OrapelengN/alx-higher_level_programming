@@ -3,6 +3,8 @@
 
 # models/base.py
 import json
+import os
+import csv
 
 
 class Base:
@@ -35,6 +37,82 @@ class Base:
             else:
                 list_dicts = [obj.to_dictionary() for obj in list_objs]
                 file.write(cls.to_json_string(list_dicts))
+
+    @classmethod
+    def create(cls, **dictionary):
+        """Return an instance with all attributes already set."""
+        # Create a dummy instance based on the class type
+        if cls.__name__ == "Rectangle":
+            dummy = cls(1, 1)  # minimal width and height for Rectangle
+        elif cls.__name__ == "Square":
+            dummy = cls(1)  # minimal size for Square
+
+        # Update dummy instance with actual attributes
+        dummy.update(**dictionary)
+        return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """Returns a list of instances loaded from a JSON file."""
+        filename = f"{cls.__name__}.json"
+
+        # Check if the file exists
+        if not os.path.exists(filename):
+            return []
+
+        # Read the JSON file
+        with open(filename, "r") as file:
+            json_data = file.read()
+
+        # Convert JSON string to list of dictionaries
+        list_dicts = cls.from_json_string(json_data)
+
+        # Convert each dictionary to an instance using the create method
+        return [cls.create(**d) for d in list_dicts]
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Serializes list_objs to a CSV file."""
+        filename = f"{cls.__name__}.csv"
+        with open(filename, mode='w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            if cls.__name__ == 'Rectangle':
+                for obj in list_objs:
+                    writer.writerow([obj.id, obj.width, obj.height, obj.x,
+                                     obj.y])
+            elif cls.__name__ == 'Square':
+                for obj in list_objs:
+                    writer.writerow([obj.id, obj.size, obj.x, obj.y])
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Deserializes from a CSV file and returns a list of instances."""
+        filename = f"{cls.__name__}.csv"
+        instances = []
+        try:
+            with open(filename, mode='r', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                for row in reader:
+                    if cls.__name__ == 'Rectangle':
+                        dictionary = {
+                                'id': int(row[0]),
+                                'width': int(row[1]),
+                                'height': int(row[2]),
+                                'x': int(row[3]),
+                                'y': int(row[4])
+                                }
+                    elif cls.__name__ == 'Square':
+                        dictionary = {
+                                'id': int(row[0]),
+                                'size': int(row[1]),
+                                'x': int(row[2]),
+                                'y': int(row[3])
+                                }
+                        instance = cls.create(**dictionary)
+                        instances.append(instance)
+        except FileNotFoundError:
+            return instances
+        return instances
 
     @staticmethod
     def from_json_string(json_string):
