@@ -15,3 +15,16 @@ class TestBase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class TestBaseCustomID(unittest.TestCase):
+
+    def test_custom_id(self):
+        """Test that Base correctly stores a custom ID when provided."""
+        base_instance = Base(89)
+
+        self.assertEqual(base_instance.id, 89)  # Check if ID is as assigned
+
+
+if __name__ == "__main__":
+    unittest.main()
