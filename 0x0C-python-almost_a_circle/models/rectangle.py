@@ -1,32 +1,76 @@
 #!/usr/bin/python3
-"""Defines a rectangle class."""
+"""Defines a Rectangle class that inherits from Base."""
 
 # models/rectangle.py
 from models.base import Base
 
 
 class Rectangle(Base):
-    """Represent a rectangle."""
+    """Rectangle class inheriting from Base class."""
 
     def __init__(self, width, height, x=0, y=0, id=None):
-        """Initialize a new Rectangle.
+        """Initializes a Rectangle instance.
+
+
         Args:
-            width (int): The width of the new Rectangle.
-            height (int): The height of the new Rectangle.
-            x (int): The x coordinate of the new Rectangle.
-            y (int): The y coordinate of the new Rectangle.
-            id (int): The identity of the new Rectangle.
-        Raises:
-            TypeError: If either of width or height is not an int.
-            ValueError: If either of width or height <= 0.
-            TypeError: If either of x or y is not an int.
-            ValueError: If either of x or y < 0.
+            width (int): The width of the Rectangle.
+            height (int): The height of the Rectangle.
+            x (int): The x coordinate of the Rectangle.
+            y (int): The y coordinate of the Rectangle.
+            id (int): The identifier for the Rectangle.
         """
+
         super().__init__(id)
         self.width = width
         self.height = height
         self.x = x
         self.y = y
+
+        @property
+        def width(self):
+            return self.__width
+
+        @width.setter
+        def width(self, value):
+            self.__validate_positive_integer("width", value)
+            self.__width = value
+
+        @property
+        def height(self):
+            return self.__height
+
+        @height.setter
+        def height(self, value):
+            self.__validate_positive_integer("height", value)
+            self.__height = value
+
+        @property
+        def x(self):
+            return self.__x
+
+        @x.setter
+        def x(self, value):
+            self.__validate_non_negative_integer("x", value)
+            self.__x = value
+
+        @property
+        def y(self):
+            return self.__y
+
+        @y.setter
+        def y(self, value):
+            self.__validate_non_negative_integer("y", value)
+            self.__y = value
+
+        def __validate_positive_integer(self, name, value):
+            """Validates that a value is a positive integer."""
+            if type(value) is not int or value <= 0:
+                raise ValueError(f"{name} must be a positive integer")
+
+        def __validate_non_negative_integer(self, name, value):
+            """Validates that a value is a non-negative integer."""
+            if type(value) is not int or value < 0:
+                raise ValueErroe(f"{name} must be a non-negative integer")
 
         def validate_integer(self, name, value):
             """Validate that value is an integer"""
@@ -42,66 +86,6 @@ class Rectangle(Base):
             """Validate that value is greater than or equal to 0"""
             if value < 0:
                 raise ValueError(f"{name} must be >= 0")
-
-        @property
-        def width(self):
-            """Set/get the width of the Rectangle."""
-            return self.__width
-
-        @width.setter
-        def width(self, value):
-            if type(value) != int:
-                raise TypeError("width must be an integer")
-            if value < 0:
-                raise ValueError("width must be >= 0")
-            self.validate_integer("width", value)
-            self.validate_positive("width", value)
-            self.__width = value
-
-        @property
-        def height(self):
-            """Set/get the height of the Rectangle."""
-            return self.__height
-
-        @height.setter
-        def height(self, value):
-            if type(value) != int:
-                raise TypeError("height must be an integeri")
-            if value < 0:
-                raise ValueError("height must be >= 0")
-            self.validate_integer("height", value)
-            self.validate_positive("height", value)
-            self.__height = value
-
-        @property
-        def x(self):
-            """Set/get the x coordinate of the Rectangle."""
-            return self.__x
-
-        @x.setter
-        def x(self, value):
-            if type(value) != int:
-                raise TypeError("x must be an integer")
-            if value < 0:
-                raise ValueError("x must be >= 0")
-            self.validate_integer("x", value)
-            self.validate_non_negative("x", value)
-            self.__x = value
-
-        @property
-        def y(self):
-            """Set/get the y coordinate of the Rectangle."""
-            return self.__y
-
-        @y.setter
-        def y(self, value):
-            if type(value) != int:
-                raise TypeError("y must be an integer")
-            if value < 0:
-                raise ValueError("y must be >= 0")
-            self.validate_integer("y", value)
-            self.validate_non_negative("y", value)
-            self.__y = value
 
         def area(self):
             """Return the area of the rectangle"""
