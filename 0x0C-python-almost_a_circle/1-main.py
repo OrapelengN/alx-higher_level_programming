@@ -12,3 +12,12 @@ if __name__ == "__main__":
 
     r3 = Rectangle(10, 2, 0, 0, 12)
     print(r3.id)
+
+
+if __name__ == "__main__":
+    try:
+        #  Create a rectangle with width and height only
+        r1 == Rectangle(10, 2)
+        print("OK")
+    except Exception as e:
+        print(f"Error: {e}")
