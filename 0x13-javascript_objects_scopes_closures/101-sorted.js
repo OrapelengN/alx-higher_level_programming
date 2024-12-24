@@ -6,7 +6,7 @@ const sortedDict = {};
 
 for (const userId in dict) {
   const occurrence = dict[userId];
-  
+
   // If the occurrence is not already a key in sortedDict, initialize it
   if (!sortedDict[occurrence]) {
     sortedDict[occurrence] = [];
