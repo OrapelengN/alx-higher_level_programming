@@ -2,7 +2,6 @@
 import MySQLdb
 import sys
 
-
 def list_states():
     """Fetches and lists all states from the database."""
     # Get arguments from command line
@@ -32,4 +31,3 @@ def list_states():
 
 if __name__ == "__main__":
     list_states()
-
