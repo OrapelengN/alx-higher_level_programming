@@ -2,9 +2,10 @@
 -- Only one record where name = Comedy (id can be different) must be contained in the tv_genres table
 -- Each record should display: tv_shows.title
 -- Sort results in ascending order by the show title
-SELECT DISTINCT tv_shows.title FROM tv_shows
+SELECT tv_shows.title
+FROM tv_shows
 LEFT JOIN tv_show_genres ON tv_shows.id = tv_show_genres.show_id
 LEFT JOIN tv_genres ON tv_show_genres.genre_id = tv_genres.id
-GROUP BY tv_shows.id
-HAVING SUM(tv_genres.name = 'Comedy') = 0
+WHERE tv_genres.name != 'Comedy' OR tv_genres.name IS NULL
+GROUP BY tv_shows.title
 ORDER BY tv_shows.title ASC;
