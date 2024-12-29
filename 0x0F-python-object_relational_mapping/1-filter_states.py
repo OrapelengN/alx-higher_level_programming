@@ -33,7 +33,7 @@ if __name__ == "__main__":
     # Fetch and display results
     rows = cursor.fetchall()
     for row in rows:
-        print(row)
+        print("({}, '{}')".format(row[0], row[1]))
 
     # Close cursor and database connection
     cursor.close()
