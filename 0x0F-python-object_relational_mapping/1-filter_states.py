@@ -24,13 +24,16 @@ if __name__ == "__main__":
 
     # Create a cursor to execute SQL queries
     cursor = db.cursor()
-    # Execute SQL query to retrieve states starting with 'N'
-    query = "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
-    cursor.execute(query)
 
-    # Fetch all rows and print each row
-    for state in cursor.fetchall():
-        print(state)
+    # SQL query (case-sensitive matching)
+    cursor.execute(
+            "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
+            )
+
+    # Fetch and display results
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
 
     # Close cursor and database connection
     cursor.close()
