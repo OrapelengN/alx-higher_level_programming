@@ -5,7 +5,11 @@ Defines the State class with SQLAlchemy ORM relationship.
 
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from relationship_base import Base  # Assuming this is in model_base.py
+from sqlalchemy.ext.declarative import declarative_base
+# from relationship_base import Base  # Assuming this is in model_base.py
+
+Base = declarative_base()
+
 
 class State(Base):
     """
