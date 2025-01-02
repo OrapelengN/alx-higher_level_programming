@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 """
-This script lists all State objects and corresponding City objects from the database.
+This script lists all State objects and corresponding City objects from the
+database.
 It takes three arguments: mysql username, mysql password, and database name.
-The script uses SQLAlchemy to connect to the MySQL server and perform the query.
+The script uses SQLAlchemy to connect to the MySQL server and perform the
+query.
 
-The results are sorted by the state ID and city ID in ascending order. Each state is
-printed followed by its cities with the specified format:
+The results are sorted by the state ID and city ID in ascending order.
+Each state is printed followed by its cities with the specified format:
 
 <state id>: <state name>
 <tabulation><city id>: <city name>
