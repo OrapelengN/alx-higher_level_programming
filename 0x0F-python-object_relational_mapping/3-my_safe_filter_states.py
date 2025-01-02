@@ -22,13 +22,18 @@ def safe_filter_states_by_name(username, password, database, state_name):
             "ORDER BY id ASC"
     )
     cur.execute(query, (state_name,))
-    states = cur.fetchall()
-
-    # print(f"Found {len(states)} matching state(s).") # Debugging
 
     # Fetch all results
-    for state in states:
-        print(state)
+    states = cur.fetchall()
+
+    # Fetch all results
+    if states:
+        print(f"Found {len(states)} matching state(s).")
+        for state in states:
+            print(state)
+    else:
+        print("No matching states found.")
+
 
     # Close the cursor and connection
     cur.close()
