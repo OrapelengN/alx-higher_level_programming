@@ -1,25 +1,10 @@
 #!/usr/bin/python3
 """
-This script defines a State class for use with SQLAlchemy ORM.
+This module defines the `State` class that maps to the `states` table in the
+`hbtn_0e_6_usa` database.
 
-The class represents a state, which is mapped to the `states`
-table in the database.
-It inherits from SQLAlchemy's `Base` class, which is used to manage
-the database connection and ORM mapping.
-
-Usage:
-    - Create a new state by creating an instance of the State class and
-    adding it to the session.
-    - Query states using SQLAlchemy's query API.
-
-Attributes:
-    id (int): The state ID (Primary Key).
-    name (str): The name of the state.
-
-Example:
-    new_state = State(name="California")
-    session.add(new_state)
-    session.commit()
+The `State` class is used to represent individual states,
+and it uses SQLAlchemy ORM to interact with the database.
 """
 
 from sqlalchemy import Column, Integer, String
@@ -31,6 +16,18 @@ Base = declarative_base()
 
 
 class State(Base):
+    """
+    State class representing a state in the `states` table.
+
+    Attributes:
+        id (int): The state ID (Primary Key).
+        name (str): The name of the state.
+
+    Methods:
+        __repr__: Returns a string representation of the state object,
+        including its ID and name.
+    """
+
     __tablename__ = 'states'
 
     # Define the columns
