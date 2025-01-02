@@ -1,4 +1,12 @@
 #!/usr/bin/python3
+"""
+Script to list all State objects from the database 'hbtn_0e_6_usa'
+using SQLAlchemy.
+
+The script connects to the database and lists all the states in ascending
+order by their IDs, displaying the state ID and name.
+"""
+
 from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
