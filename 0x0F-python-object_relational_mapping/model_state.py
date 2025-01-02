@@ -1,7 +1,10 @@
 #!/usr/bin/python3
 """
-This script inserts a new state into the `states` table and displays all states
-from the database.
+This module defines the `State` class that maps to the `states` table in the
+`hbtn_0e_6_usa` database.
+
+The `State` class is used to represent individual states, and it uses
+SQLAlchemy ORM to interact with the database.
 """
 
 from model_state import State
