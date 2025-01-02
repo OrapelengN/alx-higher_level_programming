@@ -17,14 +17,15 @@ def safe_filter_states_by_name(username, password, database, state_name):
     cur = conn.cursor()
 
     # Use parameterized query to prevent SQL injection
-    query = "SELECT id, name FROM states WHERE name = %s ORDER BY id ASC"
+    query = (
+            "SELECT id, name FROM states WHERE BINARY name = %s "
+            "ORDER BY id ASC"
+    )
     cur.execute(query, (state_name,))
+    print(f"Executing query: {query} with state_name = {state_name}")
 
     # Fetch all results
-    states = cur.fetchall()
-
-    # Print each state in the specified format
-    for state in states:
+    for state in cur.fetchall():
         print(state)
 
     # Close the cursor and connection
@@ -34,7 +35,14 @@ def safe_filter_states_by_name(username, password, database, state_name):
 
 if __name__ == "__main__":
     # Ensure that 4 arguments are passed (including the script name)
-    if len(sys.argv) == 5:
+    if len(sys.argv) != 5:
+        print(
+                "Usage: ./3-my_safe_filter_states.py <username> <password> "
+                "<database> <state>"
+        )
+        sys.exit(1)
+
+        # Retrieve arguments
         username = sys.argv[1]
         password = sys.argv[2]
         database = sys.argv[3]
