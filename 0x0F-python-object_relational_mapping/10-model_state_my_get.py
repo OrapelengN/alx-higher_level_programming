@@ -1,4 +1,14 @@
 #!/usr/bin/python3
+"""
+Script to query and display the State object with the name passed as
+an argument from the database 'hbtn_0e_6_usa'.
+The script uses SQLAlchemy to connect to the MySQL database and query the
+'states' table.
+If a state with the given name is found, its 'id' is displayed; otherwise,
+'Not found' is printed.
+The query is secure against SQL injection by using parameterized queries.
+"""
+
 from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -24,10 +34,10 @@ if __name__ == "__main__":
     session = Session()
 
     # Query for the State object with the given name
-    state = session.query(State).filter(State.name == state_name).first()
+    state = session.query(State).filter(State.name == sys.argv[4]).first()
 
     if state:
-        print(f"{state.id}")
+        print(state.id)
     else:
         print("Not found")
 
