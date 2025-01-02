@@ -1,4 +1,19 @@
 #!/usr/bin/python3
+"""
+Lists all cities from the hbtn_0e_4_usa database, sorted in ascending order by cities.id.
+
+Usage:
+    ./4-cities_by_state.py <mysql_username> <mysql_password> <database_name>
+
+Arguments:
+    mysql_username: MySQL username for the database connection.
+    mysql_password: MySQL password for the database connection.
+    database_name: The name of the database to connect to (hbtn_0e_4_usa).
+
+The script connects to the MySQL server running on localhost at port 3306 and
+retrieves and prints all cities from the cities table, sorted by their id.
+Each city's id, name, and corresponding state name are displayed.
+"""
 import MySQLdb
 import sys
 
