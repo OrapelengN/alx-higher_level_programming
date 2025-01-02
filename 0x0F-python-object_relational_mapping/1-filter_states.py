@@ -4,37 +4,50 @@ Lists all states with a name starting with 'N'
 from the database hbtn_0e_0_usa.
 """
 import MySQLdb
-import sys
+
+
+def get_states_by_name_like(username, password, database, name_like):
+    """
+    This function retrieves all states from the database hbtn_0e_0_usa that have a name starting with the provided like pattern.
+
+    Args:
+        username: The username for the MySQL database.
+        password: The password for the MySQL database.
+        database: The name of the MySQL database.
+        name_like: The pattern to match against the state names (e.g., 'N%').
+
+    Returns:
+        A list of tuples, where each tuple represents a state with its id and name.
+    """
+
+    # Connect to the MySQL database
+    conn = MySQLdb.connect(host="localhost", port=3306,
+                           user=username, passwd=password, db=database)
+    cur = conn.cursor()
+
+    # Execute the query to get states with names starting with 'N'
+    query = "SELECT * FROM states WHERE name LIKE %s ORDER BY id ASC"
+    cur.execute(query, (name_like,))
+
+    # Fetch all results
+    query_rows = cur.fetchall()
+
+    # Close the cursor and connection
+    cur.close()
+    conn.close()
+
+    return query_rows
 
 
 if __name__ == "__main__":
-    # Get MySQL credentials and database name from command-line arguments
-    user = sys.argv[1]
-    password = sys.argv[2]
-    db_name = sys.argv[3]
+    # Get user input for username, password, and database name
+    username = input("Enter MySQL username: ")
+    password = input("Enter MySQL password: ")
+    database = input("Enter database name: ")
 
-    # Connect to MySQL server
-    db = MySQLdb.connect(
-        host="localhost",
-        user=user,
-        passwd=password,
-        db=db_name,
-        port=3306
-    )
+    # Get states starting with 'N' from the database
+    states = get_states_by_name_like(username, password, database, "N%")
 
-    # Create a cursor to execute SQL queries
-    cursor = db.cursor()
-
-    # SQL query (case-sensitive matching)
-    cursor.execute(
-            "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
-            )
-
-    # Fetch and display results
-    rows = cursor.fetchall()
-    for row in rows:
-        print("({}, '{}')".format(row[0], row[1]))
-
-    # Close cursor and database connection
-    cursor.close()
-    db.close()
+    # Print the results
+    for state in states:
+        print(state)
