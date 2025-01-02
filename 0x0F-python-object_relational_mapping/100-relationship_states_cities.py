@@ -7,11 +7,13 @@ and database name.
 The State and City are linked with a relationship defined in SQLAlchemy.
 """
 
+import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from relationship_state import Base, State
+from relationship_state import State
 from relationship_city import City
-import sys
+from model_base import Base
+
 
 if __name__ == "__main__":
     """
@@ -20,6 +22,11 @@ if __name__ == "__main__":
     - Create tables if they do not exist.
     - Insert California and San Francisco if not present.
     """
+
+    # Take arguments for username, password, and database name
+    if len(sys.argv) != 4:
+        print("Usage: {} <mysql username> <mysql password> <database name>".format(sys.argv[0]))
+        sys.exit(1)
 
     # Retrieve arguments
     username = sys.argv[1]
@@ -31,6 +38,9 @@ if __name__ == "__main__":
         f"mysql+mysqldb://{username}:{password}@localhost:3306/{db_name}",
         pool_pre_ping=True
     )
+
+    # Create the tables (if not already created)
+    Base.metadata.create_all(engine)
 
     # Create a session
     Session = sessionmaker(bind=engine)
