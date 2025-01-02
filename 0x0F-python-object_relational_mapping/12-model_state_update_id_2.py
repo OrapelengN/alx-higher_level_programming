@@ -1,4 +1,14 @@
 #!/usr/bin/python3
+"""
+Script to update the name of a state with id = 2 in the 'hbtn_0e_6_usa'
+database.
+The script connects to a MySQL database, changes the name of the state with id
+= 2 to "New Mexico",
+and commits the changes to the database.
+This script uses SQLAlchemy to interact with the database and perform the
+update.
+"""
+
 from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
