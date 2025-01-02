@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
     # SQL query (case-sensitive matching)
     cursor.execute(
-                   "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
+                   "SELECT * FROM states WHERE name LIKE BINARY 'N%' ORDER BY id ASC"
             )
 
     # Fetch and display results
