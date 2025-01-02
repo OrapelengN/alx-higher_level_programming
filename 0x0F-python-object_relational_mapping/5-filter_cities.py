@@ -1,4 +1,26 @@
 #!/usr/bin/python3
+"""
+This script lists all cities from the database `hbtn_0e_4_usa`,
+ordered by the cities' `id`.
+The cities are filtered by the state name, which is provided as an argument.
+
+It connects to the MySQL database using the provided username, password, and
+database name,
+and performs a safe query using parameterized SQL to prevent SQL injection.
+
+Usage:
+    ./5-filter_cities.py <mysql_username> <mysql_password> <database_name>
+    <state_name>
+
+Arguments:
+    mysql_username: MySQL username for the database connection.
+    mysql_password: MySQL password for the database connection.
+    database_name: The name of the database to connect to.
+    state_name: The name of the state whose cities we want to list.
+
+The script outputs the cities (if any) in the specified state,
+sorted by the city's id.
+"""
 import MySQLdb
 import sys
 
