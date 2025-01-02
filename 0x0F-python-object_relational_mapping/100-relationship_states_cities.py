@@ -1,14 +1,17 @@
 #!/usr/bin/python3
 """
-Creates the State 'California' with the City 'San Francisco'
-and inserts them into the database hbtn_0e_100_usa.
+This script creates a State 'California' with a City 'San Francisco' in the
+database.
+The script connects to MySQL server using the provided username, password,
+and database name.
+The State and City are linked with a relationship defined in SQLAlchemy.
 """
 
-from sys import argv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from relationship_state import Base, State
 from relationship_city import City
+import sys
 
 if __name__ == "__main__":
     """

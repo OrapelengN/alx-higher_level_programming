@@ -1,14 +1,15 @@
-#!/usr/bin/python3
 """
-Defines the State class with SQLAlchemy ORM relationship.
+This module defines the State class, which represents the 'states' table in the
+database.
+It defines the State class with SQLAlchemy ORM mappings to the states table.
+Additionally, it establishes a relationship to the City class, where deleting a
+State will also delete related City objects.
 """
 
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
-# from relationship_base import Base  # Assuming this is in model_base.py
-
-Base = declarative_base()
+from relationship_city import City
+from relationship_city import Base
 
 
 class State(Base):

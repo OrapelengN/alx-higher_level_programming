@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 """
-Defines the City class with SQLAlchemy ORM relationship.
+This module defines the City class, which represents the 'cities' table in the
+database.
+It defines the City class with SQLAlchemy ORM mappings to the cities table.
 """
 
 from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-# from sqlalchemy.orm import relationship
-# from relationship_state import Base  # Assuming this is in model_base.py
-
-Base = declarative_base()
+from sqlalchemy.orm import relationship
+from relationship_state import Base  # Assuming this is in model_base.py
 
 
 class City(Base):
