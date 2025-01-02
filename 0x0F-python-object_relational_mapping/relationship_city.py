@@ -1,10 +1,23 @@
 #!/usr/bin/python3
+"""
+Defines the City class with SQLAlchemy ORM relationship.
+"""
+
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from model_base import Base  # Assuming this is in model_base.py
+from relationship_state import Base  # Assuming this is in model_base.py
+
 
 class City(Base):
-    """ City class that represents the cities table """
+    """
+    City class representing the 'cities' table.
+
+    Attributes:
+        id (int): Primary key for the city, auto-generated.
+        name (str): Name of the city (max 128 chars), cannot be null.
+        state_id (int): Foreign key referencing State.id, cannot be null.
+    """
+
     __tablename__ = 'cities'
 
     id = Column(Integer, primary_key=True, autoincrement=True)

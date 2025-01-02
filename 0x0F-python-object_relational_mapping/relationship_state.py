@@ -1,10 +1,22 @@
 #!/usr/bin/python3
+"""
+Defines the State class with SQLAlchemy ORM relationship.
+"""
+
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from model_base import Base  # Assuming this is in model_base.py
+from relationship_base import Base  # Assuming this is in model_base.py
 
 class State(Base):
-    """ State class that represents the states table """
+    """
+    State class representing the 'states' table.
+
+    Attributes:
+        id (int): Primary key for the state, auto-generated.
+        name (str): Name of the state (max 128 chars), cannot be null.
+        cities (relationship): One-to-many relationship with City table.
+    """
+
     __tablename__ = 'states'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
