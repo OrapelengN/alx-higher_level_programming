@@ -1,43 +1,38 @@
 #!/usr/bin/python3
 """
-This module defines the `State` class that maps to the `states` table in the
-`hbtn_0e_6_usa` database.
-
-The `State` class is used to represent individual states, and it uses
-SQLAlchemy ORM to interact with the database.
+Module to create a State class that maps to the 'states' table in a
+MySQL database
 """
 
-from model_state import State
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+import sys
+
+# Define the base class
+Base = declarative_base()
 
 
-def insert_and_display_records():
-    """Inserts a new state and displays all states."""
-    # Database connection parameters
-    username = "root"
-    password = "root"
-    database = "hbtn_0e_6_usa"
+class State(Base):
+    """State class definition inheriting from Base"""
+    __tablename__ = 'states'
 
-    # Create engine and session
-    engine = create_engine(
-            f'mysql+mysqldb://{username}:{password}@localhost/{database}'
-    )
-    Session = sessionmaker(bind=engine)
-    session = Session()
+    # Define columns
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
+    name = Column(String(128), nullable=False)
 
-    # Insert a new state record
-    new_state = State(name="California")
-    session.add(new_state)
-    session.commit()
-
-    # Display all records from the states table
-    states = session.query(State).all()
-    for state in states:
-        print(f"{state.id}: {state.name}")
-
-    session.close()
+    def __repr__(self):
+        return f"<State(id={self.id}, name={self.name})>"
 
 
 if __name__ == "__main__":
-    insert_and_display_records()
+    # Establish database connection
+    engine = create_engine(
+        'mysql+mysqldb://'
+        '{}:{}@localhost/{}'.format(sys.argv[1], sys.argv[2], sys.argv[3]),
+        pool_pre_ping=True
+    )
+
+    # Create all tables in the database
+    # (this will create 'states' if not already created)
+    Base.metadata.create_all(engine)
