@@ -23,10 +23,12 @@ if __name__ == "__main__":
     database_name = sys.argv[3]
 
     # Split the connection string into two parts to avoid line too long
-    connection_string = (f'mysql+mysqldb://{mysql_username}:{mysql_password}@'
-              f'localhost/{database_name}')
+    connection_string = (
+            f'mysql+mysqldb://{mysql_username}:{mysql_password}@'
+            f'localhost/{database_name}'
+    )
 
-    #Create the engine
+    # Create the engine
     engine = create_engine(connection_string, pool_pre_ping=True)
 
     # Create a session
