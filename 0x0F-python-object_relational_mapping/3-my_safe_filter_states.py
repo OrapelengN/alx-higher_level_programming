@@ -1,4 +1,21 @@
 #!/usr/bin/python3
+"""
+This script lists all states in a MySQL database whose name matches the provided state name.
+
+It connects to the MySQL database using the provided username, password, and database name,
+and performs a safe query using parameterized SQL to prevent SQL injection.
+
+Usage:
+    ./3-my_safe_filter_states.py <mysql_username> <mysql_password> <database_name> <state_name>
+
+Arguments:
+    mysql_username: MySQL username for the database connection.
+    mysql_password: MySQL password for the database connection.
+    database_name: The name of the database to connect to.
+    state_name: The name of the state to search for in the database.
+
+The script outputs the state(s) with matching names and their corresponding id, sorted by the id.
+"""
 import MySQLdb
 import sys
 
