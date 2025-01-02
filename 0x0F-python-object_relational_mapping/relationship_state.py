@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 This module defines the State class, which represents the 'states' table in the
 database.
