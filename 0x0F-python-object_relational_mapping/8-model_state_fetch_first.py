@@ -1,4 +1,16 @@
 #!/usr/bin/python3
+"""
+Script to print the first State object from the database 'hbtn_0e_6_usa'
+using SQLAlchemy.
+
+The script connects to the database, queries for the first state based on the
+lowest id,
+and prints the state id and name. If the states table is empty,
+it prints 'Nothing' followed
+by a new line.
+"""
+
+
 from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
