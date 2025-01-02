@@ -45,10 +45,12 @@ def filter_cities_by_state(username, password, database, state_name):
 
     # Fetch and print all results
     cities = cur.fetchall()
-    city_names = [city[0] for city in cities]  # Extract city names from result
 
-    # Print cities as a comma-separated string
-    print(", ".join(city_names))
+    # Print the results in the desired format
+    if cities:
+        print(", ".join([city[0] for city in cities]))
+    else:
+        print()
 
     # Close the cursor and connection
     cur.close()
