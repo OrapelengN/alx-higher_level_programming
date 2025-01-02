@@ -34,7 +34,6 @@ def safe_filter_states_by_name(username, password, database, state_name):
     else:
         print("No matching states found.")
 
-
     # Close the cursor and connection
     cur.close()
     conn.close()
