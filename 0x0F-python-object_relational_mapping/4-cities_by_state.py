@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Lists all cities from the hbtn_0e_4_usa database, sorted in ascending order by cities.id.
+Lists all cities from the hbtn_0e_4_usa database,
+sorted in ascending order by cities.id.
 
 Usage:
     ./4-cities_by_state.py <mysql_username> <mysql_password> <database_name>
