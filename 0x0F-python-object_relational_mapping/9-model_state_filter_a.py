@@ -1,4 +1,14 @@
 #!/usr/bin/python3
+"""
+Script to list all State objects from the database 'hbtn_0e_6_usa'
+that contain the letter 'a'.
+The script connects to the database, queries for states whose names
+contain the letter 'a',
+and prints the state id and name. Results are sorted in ascending order
+by state id.
+If no states are found, nothing is printed.
+"""
+
 from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
