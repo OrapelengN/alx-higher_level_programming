@@ -1,40 +1,40 @@
 #!/usr/bin/python3
 """
-This module defines the `State` class that maps to the `states` table in the
-`hbtn_0e_6_usa` database.
-
-The `State` class is used to represent individual states,
-and it uses SQLAlchemy ORM to interact with the database.
+This script inserts a new state into the `states` table and displays all states
+from the database.
 """
 
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
-
-# Define Base in this file if it is not imported from elsewhere
-Base = declarative_base()
+from model_state import State
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 
-class State(Base):
-    """
-    State class representing a state in the `states` table.
+def insert_and_display_records():
+    """Inserts a new state and displays all states."""
+    # Database connection parameters
+    username = "root"
+    password = "root"
+    database = "hbtn_0e_6_usa"
 
-    Attributes:
-        id (int): The state ID (Primary Key).
-        name (str): The name of the state.
-
-    Methods:
-        __repr__: Returns a string representation of the state object,
-        including its ID and name.
-    """
-
-    __tablename__ = 'states'
-
-    # Define the columns
-    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
-    name = Column(String(128), nullable=False)
-
-    # Relationship with City (a state can have multiple cities)
-    cities = relationship(
-         "City", back_populates="state", cascade="all, delete-orphan"
+    # Create engine and session
+    engine = create_engine(
+            f'mysql+mysqldb://{username}:{password}@localhost/{database}'
     )
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    # Insert a new state record
+    new_state = State(name="California")
+    session.add(new_state)
+    session.commit()
+
+    # Display all records from the states table
+    states = session.query(State).all()
+    for state in states:
+        print(f"{state.id}: {state.name}")
+
+    session.close()
+
+
+if __name__ == "__main__":
+    insert_and_display_records()
