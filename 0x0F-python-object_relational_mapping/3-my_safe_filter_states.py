@@ -22,10 +22,12 @@ def safe_filter_states_by_name(username, password, database, state_name):
             "ORDER BY id ASC"
     )
     cur.execute(query, (state_name,))
-    print(f"Executing query: {query} with state_name = {state_name}")
+    states = cur.fetchall()
+
+    # print(f"Found {len(states)} matching state(s).") # Debugging
 
     # Fetch all results
-    for state in cur.fetchall():
+    for state in states:
         print(state)
 
     # Close the cursor and connection
@@ -35,13 +37,7 @@ def safe_filter_states_by_name(username, password, database, state_name):
 
 if __name__ == "__main__":
     # Ensure that 4 arguments are passed (including the script name)
-    if len(sys.argv) != 5:
-        print(
-                "Usage: ./3-my_safe_filter_states.py <username> <password> "
-                "<database> <state>"
-        )
-        sys.exit(1)
-
+    if len(sys.argv) == 5:
         # Retrieve arguments
         username = sys.argv[1]
         password = sys.argv[2]
