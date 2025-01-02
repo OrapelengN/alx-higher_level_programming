@@ -18,9 +18,6 @@ if __name__ == "__main__":
     - Insert California and San Francisco if not present.
     """
 
-    import sys
-    from model_base import Base
-
     # Retrieve arguments
     username = sys.argv[1]
     password = sys.argv[2]
