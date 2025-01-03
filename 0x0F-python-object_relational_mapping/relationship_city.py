@@ -7,7 +7,7 @@ It defines the City class with SQLAlchemy ORM mappings to the cities table.
 
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from model_base import Base  # Assuming this is in model_base.py
+from relationship_state import Base  # Assuming this is in model_base.py
 
 
 class City(Base):

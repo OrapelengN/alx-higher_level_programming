@@ -9,7 +9,9 @@ State will also delete related City objects.
 
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from model_base import Base
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
 
 
 class State(Base):

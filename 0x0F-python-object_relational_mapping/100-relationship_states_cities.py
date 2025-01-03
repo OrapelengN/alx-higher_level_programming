@@ -10,9 +10,9 @@ The State and City are linked with a relationship defined in SQLAlchemy.
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from relationship_state import State
+from relationship_state import Base, State
 from relationship_city import City
-from model_base import Base
+# from model_base import Base
 
 
 if __name__ == "__main__":
