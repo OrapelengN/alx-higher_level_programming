@@ -1,7 +1,7 @@
 """
 >>> import sys
 >>> sys.path.append("..")
->>> from add_integer import add_integer
+>>> from 0-add_integer import add_integer
 >>> add_integer(1, 2)
 3
 >>> add_integer(100, -2)
