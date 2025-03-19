@@ -1,34 +1,27 @@
 #!/usr/bin/python3
-'''Module for Rectangle class.'''
+"""Defines a rectangle."""
+
 
 class Rectangle:
-    '''This class defines a simple Rectangle.'''
+    """Represents a rectangle."""
 
-    number_of_instances = 0
-    '''int: The number of active instances.'''
-
-    print_symbol = '#'
-    '''type: Print symbol, can be any type.'''
+    number_of_instances = 0  # Public class attribute
+    print_symbol = "#"  # Public class attribute
 
     def __init__(self, width=0, height=0):
-        '''Constructor.
+        """Initializes a new Rectangle.
 
         Args:
-            width: The width of rectangle.
-            height: The height of rectangle.
-        '''
+            width (int): The width of the new rectangle.
+            height (int): The height of the new rectangle.
+        """
         self.width = width
         self.height = height
-        Rectangle.number_of_instances += 1
+        Rectangle.number_of_instances += 1  # Increment instances
 
     @property
     def width(self):
-        '''Property for the width of the rectangle.
-
-        Raises:
-            TypeError: If width is not an integer.
-            ValueError: If width is less than 0.
-        '''
+        """Get/set the width of the rectangle."""
         return self.__width
 
     @width.setter
@@ -41,14 +34,9 @@ class Rectangle:
 
     @property
     def height(self):
-        '''Property for the height of the rectangle.
-
-        Raises:
-            TypeError: If height is not an integer.
-            ValueError: If height is less than 0.
-        '''
+        """Get/set the height of the rectangle."""
         return self.__height
-            
+
     @height.setter
     def height(self, value):
         if not isinstance(value, int):
@@ -58,47 +46,51 @@ class Rectangle:
         self.__height = value
 
     def area(self):
-        '''Returns area of this rectangle.'''
-        return self.width * self.height
+        """Return the area of the rectangle."""
+        return self.__width * self.__height
 
     def perimeter(self):
-        '''Returns perimeter of this rectangle.'''
-        if not self.width or not self.height:
+        """Return the perimeter of the rectangle."""
+        if self.__width == 0 or self.__height == 0:
             return 0
-        return (self.width + self.height) * 2
+        return 2 * (self.__width + self.__height)
 
     def __str__(self):
-        '''Returns string representation.'''
-        if not self.width or not self.height:
+        """Return the printable representation of the Rectangle."""
+        if self.__width == 0 or self.__height == 0:
             return ""
-        return ((str(self.print_symbol) * self.width + "\n") *
-                self.height)[:-1]
+        rect_str = ""
+        for _ in range(self.__height):
+            rect_str += str(self.print_symbol) * self.__width + "\n"
+        return rect_str[:-1]
 
     def __repr__(self):
-        '''Returns formal string representation...'''
-        return "Rectangle(" + str(self.width) + ", " + str(self.height) + ")"
+        """Return the string representation of the Rectangle for recreation."""
+        return f"Rectangle({self.__width}, {self.__height})"
 
     def __del__(self):
-        '''Called at instance deletion.'''
+        """Print a message when an instance of Rectangle is deleted."""
         print("Bye rectangle...")
-        Rectangle.number_of_instances -= 1
+        Rectangle.number_of_instances -= 1  # Decrement instances
 
     @staticmethod
     def bigger_or_equal(rect_1, rect_2):
-        '''Returns the bigger of two rectangles.
+        """Returns the biggest rectangle based on the area.
 
         Args:
-		rect_1: The first rectangle.
-		rect_2: The second rectangle.
-	Raises:
-		TypeErrror: If rect_1, rect_2 are not instances of Rectangle.
-	Returns:
-		The rectangle with the larger area.
-        '''
+            rect_1 (Rectangle): The first Rectangle.
+            rect_2 (Rectangle): The second Rectangle.
+
+        Returns:
+            Rectangle: The biggest Rectangle,
+            or rect_1 if both have the same area.
+        """
         if not isinstance(rect_1, Rectangle):
             raise TypeError("rect_1 must be an instance of Rectangle")
         if not isinstance(rect_2, Rectangle):
             raise TypeError("rect_2 must be an instance of Rectangle")
-        if rect_2.area() > rect_1.area():
+
+        if rect_1.area() >= rect_2.area():
+            return rect_1
+        else:
             return rect_2
-        return rect_1
