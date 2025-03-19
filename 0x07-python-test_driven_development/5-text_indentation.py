@@ -31,4 +31,4 @@ def text_indentation(text):
             continue
         i += 1
 
-    print(result.strip())  # Ensures no leading/trailing spaces in output
+    print(result, end="")  # Ensures no leading/trailing spaces in output
