@@ -1,0 +1,71 @@
+"""
+>>> from lazy_matrix_mul import lazy_matrix_mul
+>>> lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]])
+[[ 7 10]
+ [15 22]]
+>>> lazy_matrix_mul([[1, 2]], [[3, 4], [5, 6]])
+[[13 16]]
+>>> lazy_matrix_mul([[1, 2, 3]], [[3], [4], [5]])
+[[26]]
+>>> lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2, 3], [4, 5, 6]])
+[[ 9 12 15]
+ [19 26 33]]
+>>> lazy_matrix_mul("a", [[1, 2], [3, 4]])
+Traceback (most recent call last):
+    ...
+TypeError: shapes (0,) and (2, 2) not aligned: 0 (dim 0) != 2 (dim 0)
+>>> lazy_matrix_mul([[1, 2], [3, 4]], "b")
+Traceback (most recent call last):
+    ...
+TypeError: shapes (2, 2) and (0,) not aligned: 2 (dim 1) != 0 (dim 0)
+>>> lazy_matrix_mul(12, [[1, 2], [3, 4]])
+Traceback (most recent call last):
+    ...
+TypeError: shapes (0,) and (2, 2) not aligned: 0 (dim 0) != 2 (dim 0)
+>>> lazy_matrix_mul([[1, 2], [3, 4]], 12)
+Traceback (most recent call last):
+    ...
+TypeError: shapes (2, 2) and (0,) not aligned: 2 (dim 1) != 0 (dim 0)
+>>> lazy_matrix_mul([[1, 2], 3], [[1, 2], [3, 4]])
+Traceback (most recent call last):
+    ...
+ValueError: setting an array element with a sequence.
+>>> lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], 3])
+Traceback (most recent call last):
+    ...
+ValueError: setting an array element with a sequence.
+>>> lazy_matrix_mul([], [[1, 2], [3, 4]])
+Traceback (most recent call last):
+    ...
+ValueError: shape mismatch: objects cannot be broadcast to a single shape
+>>> lazy_matrix_mul([[1, 2], [3, 4]], [])
+Traceback (most recent call last):
+    ...
+ValueError: shape mismatch: objects cannot be broadcast to a single shape
+>>> lazy_matrix_mul([[]], [[1, 2], [3, 4]])
+Traceback (most recent call last):
+    ...
+ValueError: shape mismatch: objects cannot be broadcast to a single shape
+>>> lazy_matrix_mul([[1, 2], [3, 4]], [[]])
+Traceback (most recent call last):
+    ...
+ValueError: shape mismatch: objects cannot be broadcast to a single shape
+>>> lazy_matrix_mul([[1, "2"], [3, 4]], [[1, 2], [3, 4]])
+Traceback (most recent call last):
+    ...
+TypeError: invalid data type for einsum
+>>> lazy_matrix_mul([[1, 2], [3, 4]], [[1, "2"], [3, 4]])
+Traceback (most recent call last):
+    ...
+TypeError: invalid data type for einsum
+>>> lazy_matrix_mul([[1, 2], [3, 4, 5]], [[1, 2], [3, 4]])
+Traceback (most recent call last):
+    ...
+ValueError: setting an array element with a sequence.
+>>> lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4, 5]])
+Traceback (most recent call last):
+    ...
+ValueError: setting an array element with a sequence.
+>>> lazy_matrix_mul([[1, 2]], [[1, 2, 3], [4, 5, 6]])
+[[ 9 12 15]]
+"""
