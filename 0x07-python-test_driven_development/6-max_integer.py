@@ -8,17 +8,19 @@ def max_integer(lst=[]):
        If the list is empty, the function returns None.
     """
     if not isinstance(lst, list):
-        raise TypeError("list must be a list of integers/floats")
-
-    for item in lst:
-        if not isinstance(item, (int, float)):
-            raise TypeError("list must be a list of integers/floats")
+        raise TypeError("Input must be a list")
 
     if len(lst) == 0:
         return None
 
+    for item in lst:
+        if not isinstance(item, (int, float)):
+            raise TypeError("All elements in the list must be integers or floats")
+
     result = lst[0]
-    for i in range(1, len(lst)):
+    i = 1
+    while i < len(lst):
         if lst[i] > result:
             result = lst[i]
+        i += 1
     return result
