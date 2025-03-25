@@ -43,4 +43,3 @@ TypeError: test must be an integer
 ... except Exception as e:
 ...    print(f"{e.__class__.__name__}: {e}")
 TypeError: test must be an integer
-"""

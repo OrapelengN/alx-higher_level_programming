@@ -43,4 +43,3 @@ Tests for 7-base_geometry.py
 ... except Exception as e:
 ...    print(repr(f"{e.__class__.__name__}: {e}")) # added repr()
 'TypeError: test must be an integer'
-"""
