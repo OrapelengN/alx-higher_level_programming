@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """
-Module 1-my_list
+Module one-my_list
 Contains a class MyList that inherits from list.
 """
+
 
 class MyList(list):
     """
