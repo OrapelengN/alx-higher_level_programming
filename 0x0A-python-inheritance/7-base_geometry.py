@@ -4,6 +4,7 @@ Module 7-base_geometry
 Contains a class BaseGeometry with an area method and integer validator.
 """
 
+
 class BaseGeometry:
     """
     A class BaseGeometry with an area method and integer validator.
@@ -17,17 +18,27 @@ class BaseGeometry:
 
     def integer_validator(self, name, value):
         """
-        Validates value.
+        Validates that value is a positive integer.
+
+        Args:
+            name (str): The name of the variable (for error message).
+            value (int): The value to validate.
+
+        Raises:
+            TypeError: If value is not an integer.
+            ValueError: If value is not greater than 0.
         """
-        if type(value) is not int:
-            raise TypeError("{} must be an integer".format(name))
+        if not isinstance(value, int):
+            raise TypeError(f"{name} must be an integer")
         if value <= 0:
-            raise ValueError("{} must be greater than 0".format(name))
+            raise ValueError(f"{name} must be greater than 0")
+
 
 # Add the following to capture the output of the print statement.
 def capture_and_print(e):
     output = f"{e.__class__.__name__}: {e}"
-    print(repr(output)) # Print the raw representation of the output.
+    print(repr(output))  # Print the raw representation of the output.
+
 
 # Modify the doctest to use the capture_and_print function.
 if __name__ == "__main__":
