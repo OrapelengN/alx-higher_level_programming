@@ -3,6 +3,7 @@
 This module defines a Student class.
 """
 
+
 class Student:
     """
     Defines a student by first_name, last_name, and age.
