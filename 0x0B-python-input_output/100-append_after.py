@@ -15,11 +15,8 @@ def append_after(filename="", search_string="", new_string=""):
         search_string (str): The string to search for.
         new_string (str): The string to insert after the found line.
     """
-    try:
-        with open(filename, 'r') as f:
-            lines = f.readlines()
-    except FileNotFoundError:
-        return
+    with open(filename, 'r') as f:
+        lines = f.readlines()
 
     new_lines = []
     for line in lines:
