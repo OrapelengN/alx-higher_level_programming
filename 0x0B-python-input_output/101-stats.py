@@ -30,8 +30,15 @@ try:
                 total_size += file_size
             except (ValueError, IndexError):
                 pass
-        elif len(line_parts)> 0:
+        else
             try:
+                if len(line_parts) >= 2:
+                    status_code = line_parts[-2]
+                    file_size = int(line_parts[-1])
+                    if status_code in status_codes:
+                        status_codes[status_code] += 1
+                    total_size += file_size
+                elif len(line_parts) == 1:
                 total_size += int(line_parts[-1])
             except (ValueError, IndexError):
                 pass
@@ -49,4 +56,4 @@ except KeyboardInterrupt:
 print(f"File size: {total_size}")
 for code in sorted(status_codes.keys()):
     if status_codes[code] > 0:
-            print(f"{code}: {status_codes[code]}")
+        print(f"{code}: {status_codes[code]}")
