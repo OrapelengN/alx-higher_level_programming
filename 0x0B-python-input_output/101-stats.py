@@ -24,25 +24,25 @@ try:
             try:
                 status_code = line_parts[-2]
                 file_size = int(line_parts[-1])
-
                 if status_code in status_codes:
                     status_codes[status_code] += 1
                 total_size += file_size
             except (ValueError, IndexError):
                 pass
-        else
+        elif len(line_parts) >= 2:
             try:
-                if len(line_parts) >= 2:
-                    status_code = line_parts[-2]
-                    file_size = int(line_parts[-1])
-                    if status_code in status_codes:
-                        status_codes[status_code] += 1
-                    total_size += file_size
-                elif len(line_parts) == 1:
+                status_code = line_parts[-2]
+                file_size = int(line_parts[-1])
+                if status_code in status_codes:
+                    status_codes[status_code] += 1
+                total_size += file_size
+            except (ValueError, IndexError):
+                pass
+        elif len(line_parts) == 1:
+            try:
                 total_size += int(line_parts[-1])
             except (ValueError, IndexError):
                 pass
-
         line_count += 1
         if line_count % 10 == 0:
             print(f"File size: {total_size}")
