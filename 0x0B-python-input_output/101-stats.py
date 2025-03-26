@@ -30,7 +30,7 @@ try:
                 total_size += file_size
             except (ValueError, IndexError):
                 pass
-        else
+        elif len(line_parts)> 0:
             try:
                 total_size += int(line_parts[-1])
             except (ValueError, IndexError):
