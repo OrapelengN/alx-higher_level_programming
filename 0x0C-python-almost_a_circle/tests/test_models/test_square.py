@@ -201,3 +201,25 @@ class TestSquare(unittest.TestCase):
         s = Square(1)
         with self.assertRaises(AttributeError):
             s.update(invalid_attribute=10)
+
+    def test_to_dictionary(self):
+        """Test to_dictionary method."""
+        s = Square(10, 2, 1, 12)
+        expected_dict = {"id": 12, "size": 10, "x": 2, "y": 1}
+        self.assertEqual(s.to_dictionary(), expected_dict)
+
+        s2 = Square(1, 1)
+        expected_dict2 = {"id": 1, "size": 1, "x": 0, "y": 0}
+        self.assertEqual(s2.to_dictionary(), expected_dict2)
+
+    def test_to_dictionary_with_updated_attributes(self):
+        """Test to_dictionary with updated attributes."""
+        s = Square(10, 2, 1, 12)
+        s.update(size=5, x=3, y=4, id=15)
+        expected_dict = {"id": 15, "size": 5, "x": 3, "y": 4}
+        self.assertEqual(s.to_dictionary(), expected_dict)
+
+    def test_to_dictionary_type(self):
+        """Test to_dictionary return type."""
+        s = Square(10, 2, 1, 12)
+        self.assertIsInstance(s.to_dictionary(), dict)
