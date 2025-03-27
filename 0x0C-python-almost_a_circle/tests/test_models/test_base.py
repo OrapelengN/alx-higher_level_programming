@@ -162,3 +162,44 @@ if __name__ == '__main__':
             self.assertEqual(content, expected_content)
 
         os.remove("Rectangle.json")
+
+    def test_from_json_string_rectangle(self):
+        """Test from_json_string with Rectangle dictionaries."""
+        json_string = '[{"id": 89, "width": 10, "height": 4}, {"id": 7,
+                                                               "width": 1,
+                                                               "height": 7}]'
+        list_output = Base.from_json_string(json_string)
+        expected_output = [{"id": 89, "width": 10, "height": 4}, {"id": 7,
+                                                                  "width": 1,
+                                                                  "height": 7}]
+        self.assertEqual(list_output, expected_output)
+
+    def test_from_json_string_square(self):
+        """Test from_json_string with Square dictionaries."""
+        json_string = '[{"id": 1, "size": 5, "x": 1, "y": 2}, {"id": 2,
+                                                               "size": 3,
+                                                               "x": 1,
+                                                               "y": 1}]'
+        list_output = Base.from_json_string(json_string)
+        expected_output = [{"id": 1, "size": 5, "x": 1, "y": 2}, {"id": 2,
+                                                                  "size": 3,
+                                                                  "x": 1,
+                                                                  "y": 1}]
+        self.assertEqual(list_output, [{"id": 1, "size": 5, "x": 1, "y": 2},
+                                       {"id": 2, "size": 3, "x": 1, "y": 1}])
+
+    def test_from_json_string_empty_string(self):
+        """Test from_json_string with empty string."""
+        list_output = Base.from_json_string("")
+        self.assertEqual(list_output, [])
+
+    def test_from_json_string_none(self):
+        """Test from_json_string with None."""
+        list_output = Base.from_json_string(None)
+        self.assertEqual(list_output, [])
+
+    def test_from_json_string_type(self):
+        """Test from_json_string return type."""
+        json_string = '[{"id": 89, "width": 10, "height": 4}]'
+        list_output = Base.from_json_string(json_string)
+        self.assertIsInstance(list_output, list)
