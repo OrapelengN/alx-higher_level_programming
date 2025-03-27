@@ -124,3 +124,47 @@ if __name__ == '__main__':
         with self.assertRaises(TypeError):
             r.width = "string"
             r.area()
+
+    def test_display(self):
+        """Test display method."""
+        r1 = Rectangle(4, 6)
+        expected_output = "####\n####\n####\n####\n####\n####\n"
+
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+        r1.display()
+        sys.stdout = sys.__stdout__
+
+        self.assertEqual(captured_output.getvalue(), expected_output)
+
+        r2 = Rectangle(2, 2)
+        expected_output_2 = "##\n##\n"
+
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+        r2.display()
+        sys.stdout = sys.__stdout__
+
+        self.assertEqual(captured_output.getvalue(), expected_output_2)
+
+    def test_display_with_invalid_dimensions(self):
+        """Test display with invalid dimensions."""
+        r = Rectangle(1, 1)
+        with self.assertRaises(ValueError):
+            r.width = 0
+            r.display()
+
+        r = Rectangle(1, 1)
+        with self.assertRaises(ValueError):
+            r.height = 0
+            r.display()
+
+        r = Rectangle(1, 1)
+        with self.assertRaises(TypeError):
+            r.height = "string"
+            r.display()
+
+        r = Rectangle(1, 1)
+        with self.assertRaises(TypeError):
+            r.width = "string"
+            r.display()
