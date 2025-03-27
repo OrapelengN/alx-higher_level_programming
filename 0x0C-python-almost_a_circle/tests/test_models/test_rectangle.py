@@ -284,3 +284,65 @@ if __name__ == '__main__':
             r.update(1, 1, 1, 1, "invalid")
         with self.assertRaises(ValueError):
             r.update(1, 1, 1, 1, -1)
+
+    def test_update_kwargs(self):
+        """Test update method with **kwargs."""
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(height=1)
+        self.assertEqual(r1.height, 1)
+
+        r1.update(width=1, x=2)
+        self.assertEqual(r1.width, 1)
+        self.assertEqual(r1.x, 2)
+
+        r1.update(y=1, width=2, x=3, id=89)
+        self.assertEqual(r1.y, 1)
+        self.assertEqual(r1.width, 2)
+        self.assertEqual(r1.x, 3)
+        self.assertEqual(r1.id, 89)
+
+        r1.update(x=1, height=2, y=3, width=4)
+        self.assertEqual(r1.x, 1)
+        self.assertEqual(r1.height, 2)
+        self.assertEqual(r1.y, 3)
+        self.assertEqual(r1.width, 4)
+
+    def test_update_args_kwargs(self):
+        """Test update method with *args and **kwargs."""
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89, width=2, height=3, x=4, y=5)
+        self.assertEqual(r1.id, 89)
+        self.assertEqual(r1.width, 10)  # args override kwargs
+        self.assertEqual(r1.height, 10)
+        self.assertEqual(r1.x, 10)
+        self.assertEqual(r1.y, 10)
+
+    def test_update_kwargs_invalid_values(self):
+        """Test update method with invalid **kwargs."""
+        r = Rectangle(1, 1)
+
+        with self.assertRaises(TypeError):
+            r.update(width="invalid")
+        with self.assertRaises(ValueError):
+            r.update(width=0)
+
+        with self.assertRaises(TypeError):
+            r.update(height="invalid")
+        with self.assertRaises(ValueError):
+            r.update(height=0)
+
+        with self.assertRaises(TypeError):
+            r.update(x="invalid")
+        with self.assertRaises(ValueError):
+            r.update(x=-1)
+
+        with self.assertRaises(TypeError):
+            r.update(y="invalid")
+        with self.assertRaises(ValueError):
+            r.update(y=-1)
+
+    def test_update_kwargs_invalid_attribute(self):
+        """Test update method with invalid attribute name in **kwargs."""
+        r = Rectangle(1, 1)
+        with self.assertRaises(AttributeError):
+            r.update(invalid_attribute=10)
