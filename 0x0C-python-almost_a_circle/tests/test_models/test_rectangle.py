@@ -346,3 +346,25 @@ if __name__ == '__main__':
         r = Rectangle(1, 1)
         with self.assertRaises(AttributeError):
             r.update(invalid_attribute=10)
+
+    def test_to_dictionary(self):
+        """Test to_dictionary method."""
+        r = Rectangle(10, 2, 1, 9, 12)
+        expected_dict = {"id": 12, "width": 10, "height": 2, "x": 1, "y": 9}
+        self.assertEqual(r.to_dictionary(), expected_dict)
+
+        r2 = Rectangle(1, 1)
+        expected_dict2 = {"id": 1, "width": 1, "height": 1, "x": 0, "y": 0}
+        self.assertEqual(r2.to_dictionary(), expected_dict2)
+
+    def test_to_dictionary_with_updated_attributes(self):
+        """Test to_dictionary with updated attributes."""
+        r = Rectangle(10, 2, 1, 9, 12)
+        r.update(width=5, height=3, x=2, y=4, id=15)
+        expected_dict = {"id": 15, "width": 5, "height": 3, "x": 2, "y": 4}
+        self.assertEqual(r.to_dictionary(), expected_dict)
+
+    def test_to_dictionary_type(self):
+        """Test to_dictionary return type."""
+        r = Rectangle(10, 2, 1, 9, 12)
+        self.assertIsInstance(r.to_dictionary(), dict)
