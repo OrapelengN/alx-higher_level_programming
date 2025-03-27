@@ -69,7 +69,7 @@ class Base:
             dummy = cls(1, 1)  # minimal width and height for Rectangle
         elif cls.__name__ == "Square":
             dummy = cls(1)  # minimal size for Square
-        
+
         # Update dummy instance with actual attributes
         dummy.update(**dictionary)
         return dummy

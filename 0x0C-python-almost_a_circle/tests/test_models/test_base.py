@@ -228,3 +228,37 @@ if __name__ == '__main__':
             pass
         invalid_instance = InvalidClass.create(id=1)
         self.assertIsNone(invalid_instance)
+
+    # Added tests for the cases in the question
+    def test_create_rectangle_simple(self):
+        r = Rectangle.create(**{'width': 2, 'height': 3})
+        self.assertIsInstance(r, Rectangle)
+
+    def test_create_rectangle_x(self):
+        r = Rectangle.create(**{'width': 2, 'height': 3, 'x': 12})
+        self.assertIsInstance(r, Rectangle)
+
+    def test_create_rectangle_x_y(self):
+        r = Rectangle.create(**{'width': 2, 'height': 3, 'x': 12, 'y': 1})
+        self.assertIsInstance(r, Rectangle)
+
+    def test_create_rectangle_x_y_id(self):
+        r = Rectangle.create(**{'width': 2, 'height': 3, 'x': 12, 'y': 1,
+                                                                  'id': 89})
+        self.assertIsInstance(r, Rectangle)
+
+    def test_create_square_simple(self):
+        s = Square.create(**{'size': 2})
+        self.assertIsInstance(s, Square)
+
+    def test_create_square_x(self):
+        s = Square.create(**{'size': 2, 'x': 1})
+        self.assertIsInstance(s, Square)
+
+    def test_create_square_x_y(self):
+        s = Square.create(**{'size': 2, 'x': 1, 'y': 3})
+        self.assertIsInstance(s, Square)
+
+    def test_create_square_x_y_id(self):
+        s = Square.create(**{'size': 2, 'x': 1, 'y': 3, 'id': 89})
+        self.assertIsInstance(s, Square)
