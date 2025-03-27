@@ -4,6 +4,7 @@
 import unittest
 from models.base import Base
 
+
 class TestBase(unittest.TestCase):
     """Test cases for the Base class."""
 
@@ -38,9 +39,57 @@ class TestBase(unittest.TestCase):
         self.assertEqual(b3.id, 2)
 
     def test_private_attribute_access(self):
-        """Test that the private attribute __nb_objects is not directly accessible."""
+        """Test that the private attribute __nb_objects is not directly
+        accessible."""
         with self.assertRaises(AttributeError):
             print(Base.__nb_objects)
 
+
 if __name__ == '__main__':
     unittest.main()
+
+    def test_to_json_string_rectangle(self):
+        """Test to_json_string with Rectangle dictionaries."""
+        r1 = Rectangle(10, 7, 2, 8, 1)
+        dictionary = r1.to_dictionary()
+        json_string = Base.to_json_string([dictionary])
+        expected_string = '[{"id": 1, "width": 10,
+                             "height": 7, "x": 2, "y": 8}]'
+        self.assertEqual(json_string, expected_string)
+
+    def test_to_json_string_square(self):
+        """Test to_json_string with Square dictionaries."""
+        s1 = Square(10, 2, 1, 1)
+        dictionary = s1.to_dictionary()
+        json_string = Base.to_json_string([dictionary])
+        expected_string = '[{"id": 1, "size": 10, "x": 2, "y": 1}]'
+        self.assertEqual(json_string, expected_string)
+
+    def test_to_json_string_empty_list(self):
+        """Test to_json_string with empty list."""
+        json_string = Base.to_json_string([])
+        self.assertEqual(json_string, "[]")
+
+    def test_to_json_string_none(self):
+        """Test to_json_string with None."""
+        json_string = Base.to_json_string(None)
+        self.assertEqual(json_string, "[]")
+
+    def test_to_json_string_multiple_dictionaries(self):
+        """Test to_json_string with multiple dictionaries."""
+        r1 = Rectangle(10, 7, 2, 8, 1)
+        r2 = Rectangle(2, 4, 0, 0, 2)
+        dictionary1 = r1.to_dictionary()
+        dictionary2 = r2.to_dictionary()
+        json_string = Base.to_json_string([dictionary1, dictionary2])
+        expected_string = '[{"id": 1, "width": 10, "height": 7, "x": 2,
+                             "y": 8}, {"id": 2, "width": 2, "height": 4,
+                                       "x": 0, "y": 0}]'
+        self.assertEqual(json_string, expected_string)
+
+    def test_to_json_string_type(self):
+        """Test to_json_string return type."""
+        r1 = Rectangle(10, 7, 2, 8, 1)
+        dictionary = r1.to_dictionary()
+        json_string = Base.to_json_string([dictionary])
+        self.assertIsInstance(json_string, str)

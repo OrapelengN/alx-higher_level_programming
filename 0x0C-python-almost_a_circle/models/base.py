@@ -14,7 +14,11 @@ class Base:
     __nb_objects = 0  # Private class attribute to track number of instances
 
     def __init__(self, id=None):
-        """Initialize the Base class with an optional id."""
+        """Initializes a Base instance.
+
+        Args:
+            id (int): The id of the instance. If None, a new id is generated.
+        """
         if id is not None:
             self.id = id
         else:
@@ -24,7 +28,7 @@ class Base:
     @staticmethod
     def to_json_string(list_dictionaries):
         """Return the JSON string representation of list_dictionaries."""
-        if list_dictionaries is None or not list_dictionaries:
+        if list_dictionaries is None or len(list_dictionaries) == 0:
             return "[]"
         return json.dumps(list_dictionaries)
 
