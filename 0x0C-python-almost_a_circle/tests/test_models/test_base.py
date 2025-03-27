@@ -203,3 +203,28 @@ if __name__ == '__main__':
         json_string = '[{"id": 89, "width": 10, "height": 4}]'
         list_output = Base.from_json_string(json_string)
         self.assertIsInstance(list_output, list)
+
+    def test_create_rectangle(self):
+        """Test create method with Rectangle dictionary."""
+        r1 = Rectangle(3, 5, 1, 2, 10)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        self.assertEqual(str(r1), str(r2))
+        self.assertFalse(r1 is r2)
+        self.assertFalse(r1 == r2)
+
+    def test_create_square(self):
+        """Test create method with Square dictionary."""
+        s1 = Square(5, 1, 2, 10)
+        s1_dictionary = s1.to_dictionary()
+        s2 = Square.create(**s1_dictionary)
+        self.assertEqual(str(s1), str(s2))
+        self.assertFalse(s1 is s2)
+        self.assertFalse(s1 == s2)
+
+    def test_create_invalid_class(self):
+        """Test create method with invalid class."""
+        class InvalidClass(Base):
+            pass
+        invalid_instance = InvalidClass.create(id=1)
+        self.assertIsNone(invalid_instance)
