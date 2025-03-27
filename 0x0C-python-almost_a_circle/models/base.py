@@ -69,9 +69,20 @@ class Base:
             dummy = cls(1, 1)  # minimal width and height for Rectangle
         elif cls.__name__ == "Square":
             dummy = cls(1)  # minimal size for Square
+        
+        # Update dummy instance with actual attributes
+        dummy.update(**dictionary)
+        return dummy
+
+    @classmethod
+    def create(cls, **dictionary):
+        """Returns an instance with all attributes already set."""
+        if cls.__name__ == "Rectangle":
+            dummy = cls(1, 1)
+        elif cls.__name__ == "Square":
+            dummy = cls(1)
         else:
             return None
-        # Update dummy instance with actual attributes
         dummy.update(**dictionary)
         return dummy
 
