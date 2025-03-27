@@ -137,3 +137,67 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(s.x, 3)
         self.assertEqual(s.y, 4)
         self.assertEqual(s.id, 5)
+
+    def test_update_args(self):
+        """Test update method with *args."""
+        s = Square(5)
+        s.update(10)
+        self.assertEqual(s.id, 10)
+
+        s.update(1, 2)
+        self.assertEqual(s.size, 2)
+
+        s.update(1, 2, 3)
+        self.assertEqual(s.x, 3)
+
+        s.update(1, 2, 3, 4)
+        self.assertEqual(s.y, 4)
+
+    def test_update_kwargs(self):
+        """Test update method with **kwargs."""
+        s = Square(5)
+        s.update(x=12)
+        self.assertEqual(s.x, 12)
+
+        s.update(size=7, y=1)
+        self.assertEqual(s.size, 7)
+        self.assertEqual(s.y, 1)
+
+        s.update(size=7, id=89, y=1)
+        self.assertEqual(s.size, 7)
+        self.assertEqual(s.id, 89)
+        self.assertEqual(s.y, 1)
+
+    def test_update_args_kwargs(self):
+        """Test update method with *args and **kwargs."""
+        s = Square(5)
+        s.update(10, 2, x=3, y=4)
+        self.assertEqual(s.id, 10)
+        self.assertEqual(s.size, 2)
+        self.assertEqual(s.x, 0)  # args override kwargs
+        self.assertEqual(s.y, 0)
+
+    def test_update_invalid_values(self):
+        """Test update method with invalid values."""
+        s = Square(5)
+
+        with self.assertRaises(TypeError):
+            s.update(size="invalid")
+        with self.assertRaises(ValueError):
+            s.update(size=0)
+
+        with self.assertRaises(TypeError):
+            s.update(x="invalid")
+        with self.assertRaises(ValueError):
+            s.update(x=-1)
+
+        with self.assertRaises(TypeError):
+            s.update(y="invalid")
+        with self.assertRaises(ValueError):
+            s.update(y=-1)
+
+    def test_update_invalid_attribute(self):
+        """Test update method with invalid attribute in **kwargs."""
+        s = Square(1)
+        with self.assertRaises(AttributeError):
+            s.update(invalid_attribute=10)
