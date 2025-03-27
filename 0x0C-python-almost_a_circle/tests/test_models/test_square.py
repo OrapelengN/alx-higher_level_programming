@@ -107,3 +107,33 @@ class TestSquare(unittest.TestCase):
             Square(10, 2, "3")
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             Square(10, 2, -3)
+
+    def test_size_getter_setter(self):
+        """Test size getter and setter."""
+        s = Square(5)
+        self.assertEqual(s.size, 5)
+
+        s.size = 10
+        self.assertEqual(s.size, 10)
+        self.assertEqual(s.width, 10)
+        self.assertEqual(s.height, 10)
+
+    def test_size_setter_invalid_values(self):
+        """Test size setter with invalid values."""
+        s = Square(5)
+
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            s.size = "invalid"
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            s.size = 0
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            s.size = -1
+
+    def test_size_getter_setter_with_other_attributes(self):
+        s = Square(2, 3, 4, 5)
+        self.assertEqual(s.size, 2)
+        s.size = 10
+        self.assertEqual(s.size, 10)
+        self.assertEqual(s.x, 3)
+        self.assertEqual(s.y, 4)
+        self.assertEqual(s.id, 5)
