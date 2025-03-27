@@ -168,3 +168,26 @@ if __name__ == '__main__':
         with self.assertRaises(TypeError):
             r.width = "string"
             r.display()
+
+    def test_str(self):
+        """Test __str__ method."""
+        r1 = Rectangle(4, 6, 2, 1, 12)
+        self.assertEqual(str(r1), "[Rectangle] (12) 2/1 - 4/6")
+
+        r2 = Rectangle(5, 5, 1)
+        self.assertEqual(str(r2), "[Rectangle] (1) 1/0 - 5/5")
+
+        r3 = Rectangle(1, 1)
+        self.assertEqual(str(r3), "[Rectangle] (2) 0/0 - 1/1")
+
+    def test_str_with_invalid_attributes(self):
+        """Test __str__ with invalid attributes."""
+        r = Rectangle(1, 1)
+        with self.assertRaises(ValueError):
+            r.width = 0
+            str(r)
+
+        r = Rectangle(1, 1)
+        with self.assertRaises(TypeError):
+            r.height = "test"
+            str(r)
