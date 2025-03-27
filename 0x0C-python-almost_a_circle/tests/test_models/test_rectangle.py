@@ -88,3 +88,39 @@ class TestRectangle(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+    def test_area(self):
+        """Test area method."""
+        r1 = Rectangle(3, 2)
+        self.assertEqual(r1.area(), 6)
+
+        r2 = Rectangle(2, 10)
+        self.assertEqual(r2.area(), 20)
+
+        r3 = Rectangle(8, 7, 0, 0, 12)
+        self.assertEqual(r3.area(), 56)
+
+        r4 = Rectangle(1, 1)
+        self.assertEqual(r4.area(), 1)
+
+    def test_area_with_invalid_dimensions(self):
+        """Test area with invalid dimensions."""
+        r = Rectangle(1, 1)
+        with self.assertRaises(ValueError):
+            r.width = 0
+            r.area()
+
+        r = Rectangle(1, 1)
+        with self.assertRaises(ValueError):
+            r.height = 0
+            r.area()
+
+        r = Rectangle(1, 1)
+        with self.assertRaises(TypeError):
+            r.height = "string"
+            r.area()
+
+        r = Rectangle(1, 1)
+        with self.assertRaises(TypeError):
+            r.width = "string"
+            r.area()
