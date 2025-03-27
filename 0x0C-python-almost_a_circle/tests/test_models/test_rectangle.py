@@ -235,3 +235,52 @@ if __name__ == '__main__':
         with self.assertRaises(TypeError):
             r.height = "string"
             r.display()
+
+    def test_update_args(self):
+        """Test update method with *args."""
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89)
+        self.assertEqual(r1.id, 89)
+
+        r1.update(89, 2)
+        self.assertEqual(r1.width, 2)
+
+        r1.update(89, 2, 3)
+        self.assertEqual(r1.height, 3)
+
+        r1.update(89, 2, 3, 4)
+        self.assertEqual(r1.x, 4)
+
+        r1.update(89, 2, 3, 4, 5)
+        self.assertEqual(r1.y, 5)
+
+        r1.update()
+        self.assertEqual(r1.id, 89)
+        self.assertEqual(r1.width, 2)
+        self.assertEqual(r1.height, 3)
+        self.assertEqual(r1.x, 4)
+        self.assertEqual(r1.y, 5)
+
+    def test_update_args_invalid_values(self):
+        """Test update method with invalid values."""
+        r = Rectangle(1, 1)
+
+        with self.assertRaises(TypeError):
+            r.update(1, "invalid")
+        with self.assertRaises(ValueError):
+            r.update(1, 0)
+
+        with self.assertRaises(TypeError):
+            r.update(1, 1, "invalid")
+        with self.assertRaises(ValueError):
+            r.update(1, 1, 0)
+
+        with self.assertRaises(TypeError):
+            r.update(1, 1, 1, "invalid")
+        with self.assertRaises(ValueError):
+            r.update(1, 1, 1, -1)
+
+        with self.assertRaises(TypeError):
+            r.update(1, 1, 1, 1, "invalid")
+        with self.assertRaises(ValueError):
+            r.update(1, 1, 1, 1, -1)
