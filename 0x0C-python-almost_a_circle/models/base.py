@@ -53,9 +53,11 @@ class Base:
     def create(cls, **dictionary):
         """Return an instance with all attributes already set."""
         if cls.__name__ == "Rectangle":
-            dummy = cls(1, 1)
+            from models.rectangle import Rectangle
+            dummy = Rectangle(1, 1)
         elif cls.__name__ == "Square":
-            dummy = cls(1)
+            from models.square import Square
+            dummy = Square(1)
         else:
             return None
         dummy.update(**dictionary)
@@ -78,7 +80,7 @@ class Base:
     @classmethod
     def save_to_file_csv(cls, list_objs):
         """Serializes list_objs to a CSV file."""
-        filename = f"{cls.__name__}.csv"
+        filename = cls.__name__ + "csv"
         with open(filename, mode='w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             if cls.__name__ == 'Rectangle':
@@ -92,7 +94,7 @@ class Base:
     @classmethod
     def load_from_file_csv(cls):
         """Deserializes from a CSV file and returns a list of instances."""
-        filename = f"{cls.__name__}.csv"
+        filename = cls.__name__ +."csv"
         instances = []
         try:
             with open(filename, mode='r', newline='') as csvfile:

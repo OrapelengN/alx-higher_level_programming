@@ -300,3 +300,63 @@ if __name__ == '__main__':
         if os.path.exists("Rectangle.json")
         else None
         self.assertEqual(Rectangle.load_from_file(), [])
+
+    def test_save_to_file_csv_rectangle(self):
+        """Test save_to_file_csv with Rectangle instances."""
+        r1 = Rectangle(10, 7, 2, 8, 1)
+        r2 = Rectangle(2, 4, 0, 0, 2)
+        Rectangle.save_to_file_csv([r1, r2])
+
+        with open("Rectangle.csv", "r") as f:
+            content = f.read()
+            self.assertEqual(content, "1,10,7,2,8\n2,2,4,0,0\n")
+
+        os.remove("Rectangle.csv")
+
+    def test_save_to_file_csv_square(self):
+        """Test save_to_file_csv with Square instances."""
+        s1 = Square(5, 1, 2, 3)
+        s2 = Square(3, 1, 1, 4)
+        Square.save_to_file_csv([s1, s2])
+
+        with open("Square.csv", "r") as f:
+            content = f.read()
+            self.assertEqual(content, "3,5,1,2\n4,3,1,1\n")
+
+        os.remove("Square.csv")
+
+    def test_load_from_file_csv_rectangle(self):
+        """Test load_from_file_csv with Rectangle instances."""
+        r1 = Rectangle(10, 7, 2, 8, 1)
+        r2 = Rectangle(2, 4, 0, 0, 2)
+        Rectangle.save_to_file_csv([r1, r2])
+
+        loaded_rectangles = Rectangle.load_from_file_csv()
+        self.assertEqual(len(loaded_rectangles), 2)
+        self.assertEqual(str(r1), str(loaded_rectangles[0]))
+        self.assertEqual(str(r2), str(loaded_rectangles[1]))
+
+        os.remove("Rectangle.csv")
+
+    def test_load_from_file_csv_square(self):
+        """Test load_from_file_csv with Square instances."""
+        s1 = Square(5, 1, 2, 3)
+        s2 = Square(3, 1, 1, 4)
+        Square.save_to_file_csv([s1, s2])
+
+        loaded_squares = Square.load_from_file_csv()
+        self.assertEqual(len(loaded_squares), 2)
+        self.assertEqual(str(s1), str(loaded_squares[0]))
+        self.assertEqual(str(s2), str(loaded_squares[1]))
+
+        os.remove("Square.csv")
+
+    def test_load_from_file_csv_empty(self):
+        """Test load_from_file_csv with non-existent file."""
+        loaded_rectangles = Rectangle.load_from_file_csv()
+        self.assertEqual(loaded_rectangles, [])
+
+    def test_load_from_file_csv_non_existent(self):
+        """Test load_from_file_csv with non-existent file."""
+        os.remove("Rectangle.csv") if os.path.exists("Rectangle.csv") else None
+        self.assertEqual(Rectangle.load_from_file_csv(), [])
