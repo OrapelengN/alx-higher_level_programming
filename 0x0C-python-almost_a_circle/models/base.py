@@ -156,3 +156,20 @@ if __name__ == "__main__":
     s = Square.create(**{'size': 2, 'x': 1, 'y': 3, 'id': 89})
     if isinstance(s, Square):
         print("OK")
+
+    s1 = Square(5)
+    s2 = Square(7, 9, 1)
+    list_squares_input = [s1, s2]
+
+    Square.save_to_file_csv(list_squares_input)
+
+    if os.path.exists("Square.csv"):
+        print("Square.csv exists")
+    else:
+        print("Square.csv does not exist")
+
+    list_squares_output = Square.load_from_file_csv()
+
+    # Added to prevent other errors
+    if isinstance(list_squares_output, list):
+        print("OK")
