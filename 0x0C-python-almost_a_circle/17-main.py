@@ -12,3 +12,7 @@ if __name__ == "__main__":
     print(r2)
     print(r1 is r2)
     print(r1 == r2)
+
+    s = Square.create(**{'size': 2, 'x': 1, 'y': 3})
+    if isinstance(s, Square):
+        print("OK")

@@ -5,7 +5,7 @@ import json
 import os
 import csv
 import turtle
-from models.square import Square
+
 
 class Base:
     """Base class to manage the id attribute for future classes."""
