@@ -173,3 +173,20 @@ if __name__ == "__main__":
     # Added to prevent other errors
     if isinstance(list_squares_output, list):
         print("OK")
+
+    r1 = Rectangle(10, 7, 2, 8)
+    r2 = Rectangle(2, 4)
+    list_rectangles_input = [r1, r2]
+
+    Rectangle.save_to_file_csv(list_rectangles_input)
+
+    if os.path.exists("Rectangle.csv"):
+        print("Rectangle.csv exists")
+    else:
+        print("Rectangle.csv does not exist")
+
+    list_rectangles_output = Rectangle.load_from_file_csv()
+
+    # Added to prevent other errors
+    if isinstance(list_rectangles_output, list):
+        print("OK")
