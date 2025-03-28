@@ -145,3 +145,9 @@ class Base:
             draw_shape(square.x, square.y, square.size, square.size, "green")
 
         turtle.done()
+
+
+if __name__ == "__main__":
+    s = Square.create(**{'size': 2, 'x': 1, 'y': 3, 'id': 89})
+    if isinstance(s, Square):
+        print("OK")
