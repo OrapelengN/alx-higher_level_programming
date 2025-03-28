@@ -262,3 +262,41 @@ if __name__ == '__main__':
     def test_create_square_x_y_id(self):
         s = Square.create(**{'size': 2, 'x': 1, 'y': 3, 'id': 89})
         self.assertIsInstance(s, Square)
+
+    def test_load_from_file_rectangle(self):
+        """Test load_from_file with Rectangle instances."""
+        r1 = Rectangle(10, 7, 2, 8, 1)
+        r2 = Rectangle(2, 4, 0, 0, 2)
+        Rectangle.save_to_file([r1, r2])
+
+        loaded_rectangles = Rectangle.load_from_file()
+        self.assertEqual(len(loaded_rectangles), 2)
+        self.assertEqual(str(r1), str(loaded_rectangles[0]))
+        self.assertEqual(str(r2), str(loaded_rectangles[1]))
+
+        os.remove("Rectangle.json")
+
+    def test_load_from_file_square(self):
+        """Test load_from_file with Square instances."""
+        s1 = Square(5, 1, 2, 3)
+        s2 = Square(3, 1, 1, 4)
+        Square.save_to_file([s1, s2])
+
+        loaded_squares = Square.load_from_file()
+        self.assertEqual(len(loaded_squares), 2)
+        self.assertEqual(str(s1), str(loaded_squares[0]))
+        self.assertEqual(str(s2), str(loaded_squares[1]))
+
+        os.remove("Square.json")
+
+    def test_load_from_file_empty(self):
+        """Test load_from_file with non-existent file."""
+        loaded_rectangles = Rectangle.load_from_file()
+        self.assertEqual(loaded_rectangles, [])
+
+    def test_load_from_file_non_existent(self):
+        """Test load_from_file with non-existent file."""
+        os.remove("Rectangle.json")
+        if os.path.exists("Rectangle.json")
+        else None
+        self.assertEqual(Rectangle.load_from_file(), [])
