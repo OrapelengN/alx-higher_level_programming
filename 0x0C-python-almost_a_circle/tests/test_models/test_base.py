@@ -307,6 +307,7 @@ if __name__ == '__main__':
         r2 = Rectangle(2, 4, 0, 0, 2)
         Rectangle.save_to_file_csv([r1, r2])
 
+        self.assertTrue(os.path.exists("Rectangle.csv"))  # check if file exist
         with open("Rectangle.csv", "r") as f:
             content = f.read()
             self.assertEqual(content, "1,10,7,2,8\n2,2,4,0,0\n")
@@ -319,6 +320,7 @@ if __name__ == '__main__':
         s2 = Square(3, 1, 1, 4)
         Square.save_to_file_csv([s1, s2])
 
+        self.assertTrue(os.path.exists("Square.csv"))  # Check if file exists
         with open("Square.csv", "r") as f:
             content = f.read()
             self.assertEqual(content, "3,5,1,2\n4,3,1,1\n")
