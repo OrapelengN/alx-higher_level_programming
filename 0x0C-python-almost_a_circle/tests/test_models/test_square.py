@@ -1,14 +1,22 @@
 #!/usr/bin/python3
 """Unittest for Square class."""
 
+import sys
+import os
+import io
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 import unittest
 from models.square import Square
-import io
-import sys
 
 
 class TestSquare(unittest.TestCase):
     """Test cases for the Square class."""
+
+    def setUp(self):
+        """Reset __nb_objects before each test."""
+        from models.base import Base
+        Base._Base__nb_objects = 0
 
     def test_init(self):
         """Test initialization."""

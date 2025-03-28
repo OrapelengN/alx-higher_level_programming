@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 """Unittest for Base class."""
 
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 import unittest
 from models.base import Base
 
@@ -53,9 +57,8 @@ if __name__ == '__main__':
         r1 = Rectangle(10, 7, 2, 8, 1)
         dictionary = r1.to_dictionary()
         json_string = Base.to_json_string([dictionary])
-        expected_string = '[{"id": 1, "width": 10,
-                             "height": 7, "x": 2, "y": 8}]'
-        self.assertEqual(json_string, expected_string)
+        e_string = '[{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8}]'
+        self.assertEqual(json_string, e_string)
 
     def test_to_json_string_square(self):
         """Test to_json_string with Square dictionaries."""
