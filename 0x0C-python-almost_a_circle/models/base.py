@@ -94,7 +94,7 @@ class Base:
     @classmethod
     def load_from_file_csv(cls):
         """Deserializes from a CSV file and returns a list of instances."""
-        filename = cls.__name__ +."csv"
+        filename = cls.__name__ + "csv"
         instances = []
         try:
             with open(filename, mode='r', newline='') as csvfile:
