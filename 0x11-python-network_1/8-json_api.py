@@ -5,7 +5,6 @@ Takes a letter, sends a POST request to search_user, and displays the result.
 
 import requests
 import sys
-import json
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
@@ -34,7 +33,7 @@ if __name__ == "__main__":
             else:
                 print("No result")
 
-        except json.JSONDecodeError:
+        except ValueError:  # Changed json.JSONDecodeError to ValueError
             print("Not a valid JSON")
 
     except requests.exceptions.RequestException as e:
