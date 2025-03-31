@@ -22,7 +22,7 @@ if __name__ == "__main__":
                 if isinstance(result, list):
                     for user in result:
                         if (isinstance(user, dict) and "id" in user and
-                        "name" in user):
+                                "name" in user):
                             print(f"[{user['id']}] {user['name']}")
                 else:
                     print("Not a valid JSON")
